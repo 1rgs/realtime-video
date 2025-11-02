@@ -28,8 +28,8 @@ class WanTextEncoder(torch.nn.Module):
             device=torch.device('cuda')
         ).eval().requires_grad_(False)
         self.text_encoder.load_state_dict(
-            safe_load_file(os.path.join(MODEL_FOLDER, "Wan2.1-T2V-1.3B", "models_t5_umt5-xxl-enc-bf16.safetensors"),
-                       device='cuda')
+            torch.load(os.path.join(MODEL_FOLDER, "Wan2.1-T2V-1.3B", "models_t5_umt5-xxl-enc-bf16.pth"),
+                       map_location='cuda', weights_only=True)
         )
 
         self.tokenizer = HuggingfaceTokenizer(
